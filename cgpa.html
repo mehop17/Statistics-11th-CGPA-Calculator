@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0" />
+
+  <title>
+    Statistics-11th ~ HSTU
+  </title>
+
+  <!-- Google Fonts -->
+
+  <link rel="preconnect"
+    href="https://fonts.googleapis.com">
+
+  <link rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+
+      font-family:'Poppins',sans-serif;
+
+      min-height:100vh;
+
+      overflow-x:hidden;
+
+      color:white;
+
+      padding:40px 15px;
+
+      background:
+      radial-gradient(circle at top left,#8b5cf6 0%,transparent 30%),
+      radial-gradient(circle at bottom right,#06b6d4 0%,transparent 30%),
+      linear-gradient(135deg,#020617,#0f172a,#111827);
+
+      position:relative;
+    }
+
+    /* Animated Glow */
+
+    body::before{
+
+      content:"";
+
+      position:fixed;
+
+      width:500px;
+      height:500px;
+
+      background:#ff00cc;
+
+      border-radius:50%;
+
+      filter:blur(180px);
+
+      top:-150px;
+      left:-120px;
+
+      opacity:.22;
+
+      animation:
+      float1 10s infinite alternate ease-in-out;
+
+      z-index:-1;
+    }
+
+    body::after{
+
+      content:"";
+
+      position:fixed;
+
+      width:500px;
+      height:500px;
+
+      background:#00e5ff;
+
+      border-radius:50%;
+
+      filter:blur(180px);
+
+      bottom:-150px;
+      right:-120px;
+
+      opacity:.22;
+
+      animation:
+      float2 12s infinite alternate ease-in-out;
+
+      z-index:-1;
+    }
+
+    @keyframes float1{
+
+      from{
+        transform:translateY(0px);
+      }
+
+      to{
+        transform:translateY(45px);
+      }
+    }
+
+    @keyframes float2{
+
+      from{
+        transform:translateY(0px);
+      }
+
+      to{
+        transform:translateY(-45px);
+      }
+    }
+
+    /* Main Container */
+
+    .container{
+
+      max-width:980px;
+
+      margin:auto;
+
+      padding:40px;
+
+      border-radius:30px;
+
+      background:
+      rgba(255,255,255,.08);
+
+      backdrop-filter:blur(18px);
+
+      border:
+      1px solid rgba(255,255,255,.12);
+
+      box-shadow:
+      0 8px 35px rgba(0,0,0,.4),
+      inset 0 1px 1px rgba(255,255,255,.1);
+
+      animation:fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn{
+
+      from{
+        opacity:0;
+        transform:translateY(40px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    /* Top */
+
+    .top{
+      text-align:center;
+      margin-bottom:35px;
+    }
+
+    .badge{
+
+      display:inline-block;
+
+      padding:10px 20px;
+
+      border-radius:999px;
+
+      background:
+      rgba(255,255,255,.08);
+
+      border:
+      1px solid rgba(255,255,255,.12);
+
+      color:#cbd5e1;
+
+      font-size:13px;
+
+      letter-spacing:1px;
+
+      margin-bottom:20px;
+
+      animation:pulse 2s infinite;
+    }
+
+    @keyframes pulse{
+
+      0%{
+        transform:scale(1);
+      }
+
+      50%{
+        transform:scale(1.05);
+      }
+
+      100%{
+        transform:scale(1);
+      }
+    }
+
+    h1{
+
+      font-size:60px;
+
+      font-weight:800;
+
+      line-height:1.1;
+
+      background:
+      linear-gradient(
+      to right,
+      #00e5ff,
+      #ffffff,
+      #ff00cc
+      );
+
+      -webkit-background-clip:text;
+
+      -webkit-text-fill-color:transparent;
+
+      text-shadow:
+      0 0 20px rgba(255,255,255,.15);
+
+      animation:
+      glowText 3s infinite alternate;
+    }
+
+    @keyframes glowText{
+
+      from{
+        filter:
+        drop-shadow(
+        0 0 10px rgba(255,255,255,.1)
+        );
+      }
+
+      to{
+        filter:
+        drop-shadow(
+        0 0 20px rgba(255,255,255,.3)
+        );
+      }
+    }
+
+    h2{
+
+      margin-top:10px;
+
+      font-size:24px;
+
+      color:#dbeafe;
+
+      font-weight:500;
+    }
+
+    .sub{
+
+      margin-top:12px;
+
+      color:#94a3b8;
+
+      font-size:15px;
+
+      letter-spacing:.5px;
+    }
+
+    /* Table */
+
+    table{
+
+      width:100%;
+
+      border-collapse:collapse;
+
+      overflow:hidden;
+
+      border-radius:22px;
+
+      margin-top:35px;
+    }
+
+    thead{
+
+      background:
+      linear-gradient(
+      90deg,
+      #2563eb,
+      #7c3aed
+      );
+    }
+
+    th{
+
+      padding:18px;
+
+      font-size:15px;
+
+      font-weight:700;
+
+      letter-spacing:.5px;
+    }
+
+    tbody tr{
+
+      background:
+      rgba(255,255,255,.04);
+
+      transition:.3s;
+    }
+
+    tbody tr:nth-child(even){
+
+      background:
+      rgba(255,255,255,.07);
+    }
+
+    tbody tr:hover{
+
+      transform:scale(1.01);
+
+      background:
+      rgba(255,255,255,.12);
+    }
+
+    td{
+
+      padding:18px;
+
+      text-align:center;
+
+      border-bottom:
+      1px solid rgba(255,255,255,.08);
+
+      font-size:14px;
+    }
+
+    input{
+
+      width:95px;
+
+      padding:12px;
+
+      border:none;
+
+      border-radius:14px;
+
+      background:
+      rgba(255,255,255,.1);
+
+      color:white;
+
+      text-align:center;
+
+      font-size:15px;
+
+      font-weight:600;
+
+      outline:none;
+
+      transition:.3s;
+
+      border:
+      2px solid transparent;
+    }
+
+    input:focus{
+
+      border:
+      2px solid #00e5ff;
+
+      box-shadow:
+      0 0 18px rgba(0,229,255,.7);
+
+      transform:scale(1.05);
+    }
+
+    input::placeholder{
+      color:#cbd5e1;
+    }
+
+    /* Button */
+
+    .btn{
+
+      width:100%;
+
+      margin-top:35px;
+
+      padding:20px;
+
+      border:none;
+
+      border-radius:20px;
+
+      cursor:pointer;
+
+      font-size:19px;
+
+      font-weight:700;
+
+      color:white;
+
+      background:
+      linear-gradient(
+      90deg,
+      #ff00cc,
+      #3333ff,
+      #00e5ff
+      );
+
+      background-size:300% 300%;
+
+      animation:
+      moveGradient 5s infinite ease;
+
+      transition:.4s;
+
+      box-shadow:
+      0 10px 30px rgba(0,0,0,.4);
+    }
+
+    @keyframes moveGradient{
+
+      0%{
+        background-position:0% 50%;
+      }
+
+      50%{
+        background-position:100% 50%;
+      }
+
+      100%{
+        background-position:0% 50%;
+      }
+    }
+
+    .btn:hover{
+
+      transform:
+      translateY(-4px) scale(1.01);
+
+      box-shadow:
+      0 15px 40px rgba(0,0,0,.5);
+    }
+
+    /* Result */
+
+    .result{
+
+      margin-top:30px;
+
+      padding:30px;
+
+      border-radius:26px;
+
+      text-align:center;
+
+      display:none;
+
+      animation:popup .5s ease;
+    }
+
+    @keyframes popup{
+
+      from{
+        opacity:0;
+        transform:scale(.8);
+      }
+
+      to{
+        opacity:1;
+        transform:scale(1);
+      }
+    }
+
+    .success{
+
+      background:
+      rgba(16,185,129,.15);
+
+      border:
+      1px solid rgba(16,185,129,.35);
+
+      box-shadow:
+      0 0 30px rgba(16,185,129,.2);
+    }
+
+    .fail{
+
+      background:
+      rgba(239,68,68,.15);
+
+      border:
+      1px solid rgba(239,68,68,.35);
+
+      box-shadow:
+      0 0 30px rgba(239,68,68,.2);
+    }
+
+    .cg{
+
+      font-size:65px;
+
+      font-weight:800;
+
+      margin-top:18px;
+
+      animation:
+      zoom 1.5s infinite alternate;
+    }
+
+    @keyframes zoom{
+
+      from{
+        transform:scale(1);
+      }
+
+      to{
+        transform:scale(1.05);
+      }
+    }
+
+    /* Stylish Bangla */
+
+    .bangla{
+
+      font-family:
+      'Hind Siliguri',sans-serif;
+
+      font-weight:600;
+
+      letter-spacing:.3px;
+    }
+.roman{
+  font-family: serif;
+  font-weight: 800;
+  font-size: 1.3em;
+  letter-spacing: 2px;
+}
+    /* Footer */
+
+    .footer{
+
+      margin-top:35px;
+
+      text-align:center;
+
+      color:#94a3b8;
+
+      font-size:14px;
+    }
+
+    .footer span{
+
+      color:white;
+
+      font-weight:700;
+    }
+
+    /* Responsive */
+
+    @media(max-width:768px){
+
+      h1{
+        font-size:38px;
+      }
+
+      h2{
+        font-size:18px;
+      }
+
+      .container{
+        padding:20px;
+      }
+
+      td,
+      th{
+        padding:12px 8px;
+      }
+
+      input{
+        width:70px;
+      }
+
+      .cg{
+        font-size:45px;
+      }
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="top">
+
+      <div class="badge">
+        ⚡ HSTU • Statistics Department
+      </div>
+
+      <h1>
+        Statistics-11th
+      </h1>
+
+      <h2>
+  L-<span class="roman">1</span>
+  S-<span class="roman">I</span>
+  CGPA Calculator 🚀
+</h2>
+
+
+
+    </div>
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>📘 Course</th>
+          <th>🎯 Credit</th>
+          <th>📝 Grade</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr>
+          <td>Basic Statistics</td>
+          <td>3</td>
+          <td>
+            <input type="text"
+              id="grade0"
+              placeholder="A+">
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            Basic Statistics & Probability Theory (Lab)
+          </td>
+
+          <td>1.5</td>
+
+          <td>
+            <input type="text"
+              id="grade1"
+              placeholder="A">
+          </td>
+        </tr>
+
+        <tr>
+          <td>Probability Theory</td>
+
+          <td>3</td>
+
+          <td>
+            <input type="text"
+              id="grade2"
+              placeholder="B+">
+          </td>
+        </tr>
+
+        <tr>
+          <td>Fundamental Computers</td>
+
+          <td>2</td>
+
+          <td>
+            <input type="text"
+              id="grade3"
+              placeholder="A-">
+          </td>
+        </tr>
+
+        <tr>
+          <td>English</td>
+
+          <td>2</td>
+
+          <td>
+            <input type="text"
+              id="grade4"
+              placeholder="B">
+          </td>
+        </tr>
+
+        <tr>
+          <td>Algebra & Geometry</td>
+
+          <td>3</td>
+
+          <td>
+            <input type="text"
+              id="grade5"
+              placeholder="A+">
+          </td>
+        </tr>
+
+        <tr>
+          <td>Viva</td>
+
+          <td>0.5</td>
+
+          <td>
+            <input type="text"
+              id="grade6"
+              placeholder="A">
+          </td>
+        </tr>
+
+        <tr>
+          <td>Calculus</td>
+
+          <td>3</td>
+
+          <td>
+            <input type="text"
+              id="grade7"
+              placeholder="B+">
+          </td>
+        </tr>
+
+      </tbody>
+
+    </table>
+
+    <button class="btn"
+      onclick="calculateCGPA()">
+
+      ⚡ Calculate My CGPA
+
+    </button>
+
+    <div class="result"
+      id="result">
+    </div>
+
+    <div class="footer">
+      ✨ Crafted by
+      <span>
+        Opee [নবোদ্যম-১১]
+      </span>
+    </div>
+
+  </div>
+
+  <script>
+
+    const credits =
+    [3,1.5,3,2,2,3,0.5,3];
+
+    function gradeToPoint(grade){
+
+      switch(
+      grade.toUpperCase()
+      ){
+
+        case "A+":
+          return 4.00;
+
+        case "A":
+          return 3.75;
+
+        case "A-":
+          return 3.50;
+
+        case "B+":
+          return 3.25;
+
+        case "B":
+          return 3.00;
+
+        case "B-":
+          return 2.75;
+
+        case "C+":
+          return 2.50;
+
+        case "C":
+          return 2.25;
+
+        case "D":
+          return 2.00;
+
+        case "F":
+          return 0.00;
+
+        default:
+          return -1;
+      }
+    }
+
+    function calculateCGPA(){
+
+  let totalCredits =
+  credits.reduce((a,b)=>a+b,0);
+
+  let totalCourses = credits.length;
+
+  let weightedSum = 0;
+  let countedCredits = 0;
+  let passedCredits = 0;
+  let failCount = 0;
+
+  for(let i=0;i<credits.length;i++){
+
+    let grade =
+    document
+    .getElementById("grade"+i)
+    .value
+    .trim();
+
+    let point =
+    gradeToPoint(grade);
+
+    // Invalid input skip
+    if(point === -1){
+      continue;
+    }
+
+    // Fail subject
+    if(point === 0){
+      failCount++;
+      continue;
+    }
+
+    // Passed subject
+    passedCredits += credits[i];
+
+    countedCredits += credits[i];
+
+    weightedSum +=
+    point * credits[i];
+  }
+
+  let resultDiv =
+  document.getElementById("result");
+
+  resultDiv.style.display = "block";
+
+  // 40% er besi course fail OR half credit pass na korle
+  if(
+    failCount > (totalCourses * 0.4)
+    ||
+    passedCredits < (totalCredits / 2)
+  ){
+
+    resultDiv.className =
+    "result fail";
+
+    resultDiv.innerHTML = `
+
+      <div style="font-size:70px;">
+        💔
+      </div>
+
+      <div style="
+        font-size:34px;
+        font-weight:800;
+        margin-top:12px;
+
+        background:
+        linear-gradient(
+        to right,
+        #ff4d6d,
+        #ff758f
+        );
+
+        -webkit-background-clip:text;
+        -webkit-text-fill-color:transparent;
+      ">
+        Sorry Bondhu 
+      </div>
+
+      <div class="
+      bangla
+      " style="
+        margin-top:18px;
+        font-size:22px;
+        color:#fecdd3;
+        line-height:1.9;
+      ">
+
+        তোমায় re-add হতে হবে...
+        <br>
+
+        ইনশাআল্লাহ্‌ ,
+        next এ
+        strong comeback হবে 🚀
+
+      </div>
+
+      <div class="cg">
+        0.00
+      </div>
+
+    `;
+
+    return;
+  }
+
+  // CGPA
+  let cgpa =
+  weightedSum / countedCredits;
+
+  // PASS
+  resultDiv.className =
+  "result success";
+
+  resultDiv.innerHTML = `
+
+    <div style="font-size:75px;">
+      🏆
+    </div>
+
+    <div style="
+      font-size:36px;
+      font-weight:800;
+      margin-top:12px;
+
+      background:
+      linear-gradient(
+      to right,
+      #00f5a0,
+      #00d9f5
+      );
+
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    ">
+
+      Congratulations Bondhu 🎉
+
+    </div>
+
+    <div class="
+    bangla
+    " style="
+      margin-top:18px;
+      font-size:22px;
+      color:#bbf7d0;
+      line-height:1.9;
+    ">
+
+      ইনশাআল্লাহ্‌ ,
+      next semester এ
+      আরো better result হবে 🚀
+
+      <br>
+
+      Proud of your performance 💫
+
+    </div>
+
+    <div class="cg">
+      ${cgpa.toFixed(2)}
+    </div>
+
+  `;
+}
+
+  </script>
+
+</body>
+</html> 
